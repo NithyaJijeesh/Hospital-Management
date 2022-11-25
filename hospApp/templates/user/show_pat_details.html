@@ -1,0 +1,145 @@
+{% extends 'user_menu.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.9); width: 900px; border-radius: 5px; margin-left: 130px;">
+ 
+    <div class="row" >
+        <div class="col-md" >
+            <!-- First / Last Name -->
+            <fieldset class="form-group border p-3 mt-5" style="color: azure;">
+                <legend class="w-auto px-2">Patient Details</legend>
+                <div  style="margin-left: 330px; margin-bottom: 15px;">
+                    {% if pat.profile_pic %}
+                    <img src="{{ pat.profile_pic.url }}" class="rounded" style=" width : 80px;  height:80px;">
+                    {% else %}
+                    <img src="{% static 'images/default/download.png' %}"  class = 'rounded' style=" width :80px;height: 80px;" >
+                    {% endif %}
+                </div>
+                             
+                <table class="table" style="color: azure;">
+                    <tbody>
+                        <tr>
+                        <td><b> Patient ID : </b></td>
+                        <td>{{ pat.id }}</td>
+                         </tr>
+                                    <tr>
+                                        <td><b> Patient Name : </b></td>
+                                        <td>{{ pat.first_name}} {{pat.last_name}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b> Patient Type : </b></td>
+                                        {%if p.patient_type == 0 %} <td>Outpatient</td>{% else %} <td>Inpatient</td> {% endif %}
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>Age : </b></td>
+                                        <td>{{ pat.age }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Gender : </b></td>
+                                        <td>{{ pat.gender }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Address : </b></td>
+                                        <td>{{ pat.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b> Contact Number : </b></td>
+                                        <td>{{ pat.contact_num }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Email : </b></td>
+                                        <td>{{ pat.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Consulting Date</b></td>
+                                        <td>{{ pat.consulting_date }} </td> 
+                                    </tr>
+            
+                                    <tr>
+                                        <td><b>Admission Date</b></td>
+                                        <td>{{ pat.admission_date }}</td>
+                                    </tr>
+            
+                                </tbody>
+                              </table>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md">
+                        <!-- About -->
+                        <fieldset class="form-group border p-3 mt-5" style="color: azure;">
+                            <legend class="w-auto px-2">Prescription</legend>
+                            <span class="input-group">
+
+                                <table class="table" style="color: azure;">
+                                    <thead>
+                                        <tr>
+                                        <th>Prescription Date</th>
+                                        <th>Medicine</th>
+                                        <th>Description</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>{% for p in med %}
+                                                <p class="ml-4">{{ p.date | date:'d-m-Y' }}</p><br>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for p in med %}
+                                                <p class="ml-4">{{ p.medicine_name }}</p><br>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for p in med %}
+                                                <p class="ml-4">{{ p.description }}</p><br>
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                                            
+                        </fieldset>
+
+                        <fieldset class="form-group border p-3" style="color: azure;">
+                            <legend class="w-auto px-2" >Pathology Result:</legend>
+                            <span class="input-group" >
+
+                                <table class="table" style="color: azure;">
+                                    <thead>
+                                        <tr>
+                                        <th>Date</th>
+                                        <th>Test Name</th>
+                                        <th>Description</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>{% for p in path %}
+                                                <p class="ml-4">{{ p.test_date | date:'d-m-Y' }}</p><br>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for p in path %}
+                                                <p class="ml-4">{{ p.path_test.test_name }}</p><br>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for p in path%}
+                                                <p class="ml-4">{{ p.description }}</p><br>
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </fieldset>
+                    </div>
+                </div>
+   
+</div>
+{% endblock %}

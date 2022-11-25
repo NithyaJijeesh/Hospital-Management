@@ -1,0 +1,79 @@
+{% extends 'patient_menu.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="container p-5 " style=" width: 900px; margin-left: 160px;">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 mt-0">
+            <p class="lead fw-normal" style="color: aliceblue; font-size:25px "><b>PROFILE</b></p>
+            <div class="mt-5">
+
+            </div>
+
+                <div class="panel p-3">
+
+                
+
+                <h3 class="text-center mt-3"style="text-transform: capitalize; color: azure ; ">
+                    <b>{{ user.first_name }} {{user.last_name }} </b>
+                </h3>
+
+                <div class="panel-body table-responsive mt-4">
+                  
+                  <table class="table">
+                  
+                    <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{ pat.gender }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{ pat.age }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{ pat.address }}</td>
+                        </tr>
+                        <tr>
+                            <td>Contact Number</td>
+                            <td>{{ pat.contact_num }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Doctor</td>
+                           <td>{{ pat.doctor.user.first_name }} {{pat.doctor.user.last_name }}</td>
+                        </tr>
+                        
+
+                        <tr>
+                            <td>Appointment Date</td>
+                            <td>{{ pat.consulting_date }}</td>
+                        </tr>
+                        <tr>
+                            <td>Patient Type</td>
+                            {%if pat.patient_type == 0 %} <td>Outpatient</td>{% else %} <td>Inpatient</td> {% endif %}
+                        </tr>
+
+                    </tbody>
+                  </table>
+                  <a href="{% url 'edit_pat_profile' pat.id %}" role = "button" class = "btn btn-outline-dark mt-3"
+                  style=" background-color: rgb(30, 35, 62);color: azure; padding: 3; margin-left: 100px; width: 200px; ">
+                  Edit profile</a>
+                  <a href="" role = "button" class = "btn btn-outline-dark mt-3 " 
+                  style=" background-color: rgb(30, 35, 62);color: azure; padding: 3; margin-left: 30px; width: 200px;">
+                  Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

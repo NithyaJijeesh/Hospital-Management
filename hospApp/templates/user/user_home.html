@@ -1,0 +1,24 @@
+{% extends 'user_menu.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="container">
+     <div class="row">
+          <div class="col6">
+               <div class="card text-center" style="border-radius:10px ;  margin-top: 250px;margin-left: 300px; 
+                         width: 250px; height: 100px;">
+                    <h3>Outpatient</h3>
+                    <p>{{op}}</p>
+               </div>
+          </div>
+          <div class="col6">
+               <div class="card text-center" style="border-radius:10px ;  margin-top: 250px;margin-left: 50px; 
+                         width: 250px; height: 100px;">
+                    <h3>Inpatient</h3>
+                    <p>{{ip}}</p>
+               </div>
+          </div>
+     </div>
+</div>
+{% endblock %}

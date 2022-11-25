@@ -1,0 +1,150 @@
+{% extends 'admin_menu.html' %}
+{% block content %}
+
+{% load static %}
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7); width: 800px; border-radius: 5px;">
+
+  <h2 class="text-center mt-5 p-2 text-uppercase font-weight-bold mb-5" style="background-color : rgba(80, 93, 108); color: azure;"> 
+    Edit Doctor Profile</h2>
+
+          
+                <form class="was-validated 100vw" action="{% url 'edit_doctor' user1.id  %}" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    
+                    <span class="input-group" >
+                        <div class="mb-3 mt-3" id ='fname'>
+                          
+                          <input type="text" class="form-control " name="f_name"  
+                          style="width: 345px; text-transform: capitalize;" value="{{ user2.first_name }}"> 
+                        </div>
+                        
+                        <div class="mb-3 mt-3" >
+                            <input type="text" class="form-control " name="l_name"  
+                            style="width: 345px; margin-left :12px ; text-transform: capitalize;" value="{{ user2.last_name }}"> 
+                          </div>
+                        </span>
+            
+                        <span class="input-group" >
+                            
+                         <div class="mb-3 mt-3" >
+                          <input type="text" class="form-control " name="uname"  
+                          style="width: 345px;" value="{{ user2.username }}"> 
+                        </div>
+            
+                        
+                        <div class="mb-3 mt-3" id="adrs">
+                            <input type="text" class="form-control" name="address" 
+                            style="width: 345px; margin-left :12px ;text-transform: capitalize;" value="{{ user1.address }}">
+                          </div>
+            
+                        </span>
+                        
+                        <span class="input-group mb-3 mt-3" style="width: 500px;">
+                            <label for="gender" class="form-label "><b>Gender:</b></label>
+              
+                            <input type="radio" id="male" name="gender" {% if user1.gender == 'Male' %} checked {% endif %} value="Male" class="radio form-control col-sm-1">
+                            <label for="male" class="form-label " >Male</label>
+              
+                            <input type="radio" id="female" name="gender" {% if user1.gender == 'Female' %} checked {% endif %} value="Female" class="radio form-control col-sm-1">
+                            <label for="female" class="form-label " >Female</label>
+              
+                            <input type="radio" id="other" name="gender" {% if user1.gender == 'Others' %} checked {% endif %} value="Others" class="radio form-control  col-sm-1">
+                            <label for="other" class="form-label " >Others</label>
+                          </span>
+            
+            
+                       <span class="input-group">
+                          
+                            <div class="mb-3 mt-3">
+                                <input type="email" class="form-control" name = 'email' value="{{ user2.email }}" 
+                                style="width: 345px;">
+                              </div>
+                              <div class="mb-3 mt-3">
+                                <input type="number" class="form-control" name="cnum" value="{{ user1.contact_num }}" 
+                                style="width: 345px; margin-left :12px ;">
+                            </div>
+                          
+                        </span>
+                                    
+                        <span class="input-group">
+                          <div class="mb-3">
+                            <span class="input-group">
+                            
+                            <select class="form-control mb-3 mt-3" name = 'qual' style="width: 345px;">
+            
+                              {% if qual.id == "{{user1.qualification_id}}" %}
+                              <option value="{{user1.qualification_id}}" selected>{{user1.qualification}}</option>                               
+                          {% else %}
+                              <option value="{{user1.qualification_id}}">{{user1.qualification}}</option>
+                          {% endif %}
+
+                          {% for q in qual %}
+                              <option type="text"  value = '{{q.id}}' > {{q.qualification}} </option>
+                          {% endfor %}
+                                
+                
+                              </select>
+                            </span>
+                          </div>
+            
+                          <div>
+                            <span class="input-group">
+                            
+                            <select class="form-control mb-3 mt-3"name = 'dpt' style="width: 345px; margin-left :12px ;">
+            
+                              {% if dpt.id == "{{user1.department_id}}" %}
+                                        <option value="{{user1.department_id}}" selected>{{user1.department}}</option>
+                                    {% else %}
+                                        <option value="{{user1.department_id}}">{{user1.department}}</option>
+                                    {% endif %}
+                                              
+                                    {% for d in dpt %}
+                  
+                                    <option type="text"  value = '{{d.id}}' > {{d.department}} </option>
+                    
+                                    {% endfor %}
+                
+                              </select>
+                            </span>
+                          </div>
+                        </span>
+                          
+                          <div class="mb-3">
+                            {% if user1.profile_pic %}
+
+                            <img src="{{ user1.profile_pic.url }}" style=" width :50px;height: 50px;">
+                        
+                            {% endif %}
+                            <input type="file" name = 'file' class="form-control" >
+                          </div>
+            
+                          <span class="input-group">
+
+                            <div class="mb-3 mt-3">
+                                <input type="date" class="form-control" name = 'jdate' placeholder="Joining Date"
+                                style="width: 345px;" value="{{ user1.joining_date | date:'Y-m-d' }}">
+                              </div>
+            
+                              <div class="mb-3 mt-3">
+                                <input type="number" class="form-control" name = 'fee' placeholder="Fees"
+                                style="width: 345px;margin-left :12px ;" value="{{ user1.fees }}">
+                              </div>
+                          </span>
+                                                    
+                        <button type="submit" class="btn  text-align-center font-weight-bold mt-2" 
+                        style="width: 200px;  margin-left: 250px; background-color:rgba(80, 93, 108); 
+                        color: aliceblue;"> SAVE </button>
+            
+                        
+
+                    
+
+                </form>
+                
+                
+            </div>
+        </div>
+
+{% endblock %}

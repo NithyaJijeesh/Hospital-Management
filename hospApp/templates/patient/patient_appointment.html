@@ -1,0 +1,39 @@
+{% extends 'patient_menu.html' %}
+{% block title %}
+    Patient
+{% endblock %}
+{% load static %}
+
+{% block content %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xl-6">
+        <div class="card  order-card" style="margin-left: 70px;margin-right: 35px ; background-color:rgb(79, 47, 68);">
+          <div class="card-block">
+            <a href="{% url 'view_appointment' %}">
+              <h6 class="m-b-20">View Your Appointment</h6>
+            </a>
+            <br>
+            <h2 class="text-right"><i class="fas fa-calendar f-left"></i></h2>
+  
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4 col-xl-6">
+        <div class="card  order-card" style="margin-left:30px;margin-right:70px ; background-color:darkslategrey">
+          <div class="card-block">
+            <a href="{% url 'add_appointment' %}">
+              <h6 class="m-b-20">Book Appointment</h6>
+            </a>
+            <br>
+            <h2 class="text-right"><i class="fas fa-book-medical f-left"></i></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

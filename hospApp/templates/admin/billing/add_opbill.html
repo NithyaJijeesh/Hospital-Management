@@ -1,0 +1,39 @@
+{% extends 'admin_menu.html' %}
+{% block content %}
+
+{% load static %}
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7); width: 800px; border-radius: 5px;">
+
+    <h2 class="text-center text-uppercase  font-weight-bold mb-5 mt-5 p-2" style="background-color : rgba(80, 93, 108); color: azure;"> 
+        Outpatient Bill</h2>
+    
+        <form action="{% url 'add_opbill' %}" method='post' enctype="multipart/form-data">
+
+          {% csrf_token %}
+
+          
+            <div class="mb-3 mt-3">
+                <label for="date" class="form-label "><b>Bill Date:</b></label>
+
+                  <input type="date" class="form-control" name = 'b_date' placeholder="Bill Date">
+                </div>
+            <div class="mb-3 mt-3" id ='fname'>
+                  
+                <input type="text" class="form-control " name="p_id" placeholder="Patient ID" > 
+              </div>
+              <div>
+
+                
+                            
+            <button type="submit" class="btn  text-align-center font-weight-bold mt-2" 
+                    style="width: 200px;  margin-left: 250px; background-color:rgba(80, 93, 108); color: aliceblue;">
+                    ADD
+            </button>
+
+
+        </form>
+    </div>
+
+
+{% endblock %}

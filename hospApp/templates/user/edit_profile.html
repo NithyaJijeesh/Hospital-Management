@@ -1,0 +1,142 @@
+{% extends 'user_menu.html' %}
+{% block content %}
+
+{% load static %}
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7); width: 800px; border-radius: 5px;">
+
+  <h2 class="text-center mt-5 p-2 text-uppercase font-weight-bold mb-5" style="background-color : rgba(80, 93, 108); color: azure;"> 
+    Edit Profile</h2>
+
+          
+                <form class="was-validated 100vw" action="{% url 'edit_profile' doc.id  %}" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    
+                    <span class="input-group" >
+                        <div class="mb-3 mt-3" id ='fname'>
+                          
+                          <input type="text" class="form-control " name="f_name"  
+                          style="width: 345px; text-transform: capitalize;" value="{{ user1.first_name }}"> 
+                        </div>
+                        
+                        <div class="mb-3 mt-3" >
+                            <input type="text" class="form-control " name="l_name"  
+                            style="width: 345px; margin-left :12px ; text-transform: capitalize;" value="{{ user1.last_name }}"> 
+                          </div>
+                        </span>
+            
+                        
+                        <span class="input-group" >
+                        <div class="mb-3 mt-3" id="usr">
+                            <input type="text" class="form-control" name="uname" value="{{ user1.username}}" style="width: 345px;">
+                          </div>
+                          <div class="mb-3 mt-3" id="adrs">
+                            <input type="text" class="form-control" name="address" value="{{ doc.address }}" style="width: 345px; margin-left :12px ;">
+                          </div>
+                        </span>
+            
+                        
+                        <span class="input-group mb-3 mt-3" style="width: 500px; ">
+                         
+                            <label for="gender" class="form-label " style="color: azure ;font-size: medium;margin-left: 0px;"><b>Gender:</b></label>
+              
+                            <input type="radio" id="male" name="gender" {% if doc.gender == 'Male' %} checked {% endif %} value="Male"
+                             class="radio form-control col-sm-1" style="width: 15px;height: 15px;">
+                            <label for="male" class="form-label " style="color: azure ;font-size: medium;margin-left: 0px;">Male</label>
+              
+                            <input type="radio" id="female" name="gender" {% if doc.gender == 'Female' %} checked {% endif %} value="Female" 
+                            class="radio form-control col-sm-1" style="width: 15px;height: 15px;">
+                            <label for="female" class="form-label " style="color: azure ;font-size: medium;margin-left: 0px;">Female</label>
+              
+                            <input type="radio" id="other" name="gender" {% if doc.gender == 'Others' %} checked {% endif %} value="Others"
+                             class="radio form-control  col-sm-1" style="width: 15px;height: 15px;">
+                            <label for="other" class="form-label " style="color: azure ;font-size: medium;margin-left: 0px;">Others</label>
+                          
+                          </span>
+            
+            
+                       <span class="input-group">
+                          
+                            <div class="mb-3 mt-3">
+                                <input type="email" class="form-control" name = 'email' value="{{ user1.email }}" 
+                                style="width: 345px;">
+                              </div>
+                              <div class="mb-3 mt-3">
+                                <input type="number" class="form-control" name="cnum" value="{{ doc.contact_num }}" 
+                                style="width: 345px; margin-left :12px ;">
+                            </div>
+                          
+                        </span>
+                                    
+                        <span class="input-group">
+                          <div class="mb-3">
+                            <span class="input-group">
+                            
+                            <select class="form-control mb-3 mt-3" name = 'qual' style="width: 345px;">
+                                
+                                {% if qual.id == "{{doc.qualification_id}}" %}
+                                    <option value="{{doc.qualification_id}}" selected>{{doc.qualification}}</option>                               
+                                {% else %}
+                                    <option value="{{doc.qualification_id}}">{{doc.qualification}}</option>
+                                {% endif %}
+
+                                {% for q in qual %}
+                                    <option type="text"  value = '{{q.id}}' > {{q.qualification}} </option>
+                                {% endfor %}
+                
+                            
+                              </select>
+                            </span>
+                          </div>
+            
+                          <div>
+                            <span class="input-group">
+                            
+                            <select class="form-control mb-3 mt-3"name = 'dpt' style="width: 345px; margin-left :12px ;">
+            
+                                
+                                    {% if dpt.id == "{{doc.department_id}}" %}
+                                        <option value="{{doc.department_id}}" selected>{{doc.department}}</option>
+                                    {% else %}
+                                        <option value="{{doc.department_id}}">{{doc.department}}</option>
+                                    {% endif %}
+                                              
+                                    {% for d in dpt %}
+                  
+                                    <option type="text"  value = '{{d.id}}' > {{d.department}} </option>
+                    
+                                    {% endfor %}
+                    
+                
+                              </select>
+                            </span>
+                          </div>
+                        </span>
+                          
+                          <div class="mb-3">
+                            {% if doc.profile_pic %}
+
+                            <img src="{{ doc.profile_pic.url }}" style=" width :50px;height: 50px;">
+                        
+                            {% endif %}
+                            <input type="file" name = 'file' class="form-control" >
+                          </div>
+            
+                        
+                                                    
+                        <button type="submit" class="btn  text-align-center font-weight-bold mt-2" 
+                        style="width: 200px;  margin-left: 250px; background-color:rgba(80, 93, 108); 
+                        color: aliceblue;"> SAVE CHANGES</button>
+            
+                        
+
+                    
+
+                </form>
+                
+                
+            </div>
+        </div>
+
+{% endblock %}

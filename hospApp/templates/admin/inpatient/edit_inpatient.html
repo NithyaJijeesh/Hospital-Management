@@ -1,0 +1,153 @@
+{% extends 'admin_menu.html' %}
+{% block content %}
+
+
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7); width: 800px; border-radius: 5px;">
+
+    <h2 class="text-center text-uppercase  font-weight-bold mb-5 mt-5 p-2" style="background-color : rgba(80, 93, 108); color: azure;"> 
+        Update Inpatient</h2>
+    
+        <form action="{% url 'edit_inpatient' pt.id %}" method='post'>
+
+          {% csrf_token %}
+
+          
+          <span class="input-group" >
+            <div class="mb-3 mt-3" id ='fname'>
+              
+              <input type="text" class="form-control " name="f_name" value="{{ pt.first_name }}" 
+              style="width: 345px; "> 
+            </div>
+            
+            <div class="mb-3 mt-3" >
+                <input type="text" class="form-control " name="l_name" value="{{ pt.last_name }}"
+                style="width: 345px; margin-left :12px ;"> 
+              </div>
+            </span>
+
+              <span class="input-group mb-3 mt-3" style="width: 500px;">
+                <label for="gender" class="form-label "><b>Gender:</b></label>
+  
+                <input type="radio" id="male" name="gender"  {% if pt.gender == 'Male' %} checked {% endif %} value="Male"  class="radio form-control col-sm-1">
+                <label for="male" class="form-label " >Male</label>
+  
+                <input type="radio" id="female" name="gender"  {% if pt.gender == 'Female' %} checked {% endif %} value="Female"  class="radio form-control col-sm-1">
+                <label for="female" class="form-label " >Female</label>
+  
+                <input type="radio" id="other" name="gender"  {% if pt.gender == 'Others' %} checked {% endif %} value="Others"  class="radio form-control  col-sm-1">
+                <label for="other" class="form-label " >Others</label>
+              </span>
+
+
+
+            <span class="input-group" >
+                <div class="mb-3 mt-3" id="adrs" style="width: 345px;">
+                    <input type="text" class="form-control" name="address" value="{{ pt.address}}">
+                </div>
+
+                <div class="mb-3 mt-3" id="age" style="width: 345px; margin-left :12px ;">
+                    <input type="number" class="form-control" name="age" value="{{pt.age}}">
+                </div>
+                
+               
+
+            </span>
+            
+            
+           <span class="input-group">
+              
+                <div class="mb-3 mt-3">
+                    <input type="email" class="form-control" name = 'email' value="{{pt.email}}"
+                    style="width: 345px;">
+                </div>
+                <div class="mb-3 mt-3">
+                    <input type="number" class="form-control" name="cnum" value="{{pt.contact_num}}"
+                    style="width: 345px; margin-left :12px ;">
+                </div>
+              
+            </span>
+                        
+            <span class="input-group">
+              <div class="mb-3">
+                <span class="input-group">
+                
+                <select class="form-control  mt-3"name = 'doc' style="width: 345px;">
+    
+
+                  {% if doc.id == "{{pt.doctor_id}}" %}
+                  <option value="{{pt.doctor_id}}" selected>{{pt.doctor.user.first_name}} {{pt.doctor.user.last_name}}</option>
+              {% else %}
+                  <option value="{{pt.doctor_id}}">{{pt.doctor.user.first_name}} {{pt.doctor.user.last_name}}</option>
+              {% endif %}
+
+              {% for d in doc %}
+                  <option type="text"  value = '{{d.id}}' style="text-transform: capitalize;"> 
+                          {{d.user.first_name}} {{d.user.last_name}}</option>
+
+              {% endfor %}
+                    
+                  </select>
+                </span>
+              </div>
+
+              <div>
+                <span class="input-group">
+                
+                <select class="form-control  mt-3" name = 'room' style="width: 345px; margin-left :12px ;">
+
+                        
+
+                  {% if room1.id == "{{pt.room_id}}" %}
+                  <option value="{{pt.room_id}}" selected>{{pt.room}}</option>
+              {% else %}
+                  <option value="{{pt.room_id}}">{{pt.room}}</option>
+              {% endif %}       
+              {% for r in room1 %}
+                  
+                    <option type="text"  value = '{{r.id}}' > {{r.room_type}} </option>
+    
+                    {% endfor %}
+    
+                  </select>
+                </span>
+              </div>
+
+            </span>
+            <div class="mb-3">
+              {% if user1.profile_pic %}
+
+              <img src="{{ user1.profile_pic.url }}" style=" width :50px;height: 50px;">
+          
+              {% endif %}
+              <input type="file" name = 'file' class="form-control" >
+            </div>
+
+             
+
+              <span class="input-group">
+                <div class="mb-3 " style="width: 345px;">
+                    <label for="date1" class="form-label "><b>Consulting Date:</b></label>
+
+                    <input type="date" class="form-control" name = 'date1' value="{{ pt.consulting_date | date:'Y-m-d' }}">
+                  </div>
+
+                  <div class="mb-3 " style="width: 345px;margin-left :12px ;">
+                    <label for="date2" class="form-label "><b>Admission Date:</b></label>
+
+                    <input type="date" class="form-control" name = 'date2' value="{{ pt.admission_date | date:'Y-m-d' }}">
+                  </div>
+
+
+              </span>
+
+                            
+            <button type="submit" class="btn  text-align-center font-weight-bold mt-2" 
+            style="width: 200px;  margin-left: 250px; background-color:rgba(80, 93, 108); color: aliceblue;">Update</button>
+
+
+        </form>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'user_menu.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="container p-5 " style=" width: 900px; margin-left: 160px;">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 mt-0">
+            <p class="lead fw-normal" style="color: aliceblue; font-size:25px "><b>PROFILE</b></p>
+            <div class="panel p-3">
+
+                <h3 class="text-center mt-3"style="text-transform: capitalize; color: azure ; ">
+                    <b> Dr. {{ user.first_name }} {{user.last_name }} </b>
+                </h3>
+
+                <div class="panel-body table-responsive mt-5">
+                  <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{ doc.gender }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{ doc.address }}</td>
+                        </tr>
+                        <tr>
+                            <td>Contact Number</td>
+                            <td>{{ doc.contact_num }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Qualification</td>
+                            <td>{{ doc.qualification.qualification }}</td>
+                        </tr>
+                        <tr>
+                            <td>Department</td>
+                            <td>{{ doc.department.department }} </td> 
+                        </tr>
+
+                        <tr>
+                            <td>Joining Date</td>
+                            <td>{{ doc.joining_date }}</td>
+                        </tr>
+
+                    </tbody>
+                  </table>
+                  <a href="{% url 'edit_profile' doc.id %}" role = "button" class = "btn btn-outline-dark mt-3"
+                  style=" background-color: rgb(30, 35, 62);color: azure; padding: 3; margin-left: 100px; width: 200px; ">
+                  Edit profile</a>
+                  <a href="" role = "button" class = "btn btn-outline-dark mt-3 " 
+                  style=" background-color: rgb(30, 35, 62);color: azure; padding: 3; margin-left: 30px; width: 200px;">
+                  Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  {% endblock %}

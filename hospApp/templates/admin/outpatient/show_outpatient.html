@@ -1,0 +1,62 @@
+{% extends 'admin_menu.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7);border-radius: 5px;">
+    <h2 class="text-center p-2 mt-5 text-uppercase font-weight-bold mb-5" style="background-color : rgba(80, 93, 108); color: azure;"> 
+        Outpatient Details</h2>
+    <table class="table table-striped" style="background-color: aliceblue; margin-left: 15px;">
+
+      <thead class = "mt-3 p-1" style="background-color: rgb(76, 68, 68); color:azure;">
+        <tr>
+          
+          <th>PATIENT ID</th>
+          <th>PROFILE PHOTO</th>
+          <th>PATIENT NAME</th>
+          <th>ADDRESS</th>
+          <th>CONTACT NUMBER</th>
+          <th>DOCTOR</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+
+      <tbody class="font-weight-bold">
+        
+            {% for p in outpatient %}
+        <tr>
+          <td>{{ p.id}}</td>
+          <td>
+            {% if p.profile_pic %}
+            <img src="{{ p.profile_pic.url }}" class="rounded" style=" width :50px;height: 50px;">
+            {% else %}
+            <img src="{% static 'images/default/download.png' %}"  class = 'rounded' style=" width :50px;height: 50px;" >
+            {% endif %}
+          </td>
+            <td style="text-transform: capitalize;">{{ p.first_name }} {{ p.last_name }}</td>
+            <td>{{ p.address }}</td>
+            <td>{{ p.contact_num }}</td>
+            <td style="text-transform: capitalize;">
+              {% if p.user_id == NULL %}{{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}
+              {% else %}{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}
+              {% endif %}
+            </td>
+
+            
+            <td>
+              <a href='/edit_outpatient/{{ p.id }}' style="color: black; text-transform:none; ">
+                <i class="fa fa-edit"></i>EDIT</a><br>
+            <a href='/del_outpatient/{{ p.id }}'style="color: black; text-transform:none; ">
+              <i class="fa fa-trash"></i>DELETE</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="{% url 'add_outpatient' %}" role="button" class="btn  text-align-center font-weight-bold mt-2" 
+    style="width: 300px;  margin-left: 350px; background-color:rgba(80, 93, 108); color: aliceblue;"> 
+    Add Outpatient</a>
+
+</div>
+{% endblock%}

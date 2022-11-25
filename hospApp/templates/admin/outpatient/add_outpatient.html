@@ -1,0 +1,111 @@
+{% extends 'admin_menu.html' %}
+{% block content %}
+
+{% load static %}
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7); width: 800px; border-radius: 5px;">
+
+    <h2 class="text-center text-uppercase  font-weight-bold mb-5 mt-5 p-2" style="background-color : rgba(80, 93, 108); color: azure;"> 
+        Register Outpatient</h2>
+    
+        <form action="{% url 'add_outpatient' %}" method='post' enctype="multipart/form-data">
+
+          {% csrf_token %}
+
+          
+          <span class="input-group" >
+            <div class="mb-3 mt-3" id ='fname'>
+              
+              <input type="text" class="form-control " name="fname" placeholder="First Name" 
+              style="width: 345px; "> 
+            </div>
+            
+            <div class="mb-3 mt-3" >
+                <input type="text" class="form-control " name="lname" placeholder="Last Name" 
+                style="width: 345px; margin-left :12px ;"> 
+              </div>
+            </span>
+
+            <span class="input-group mb-3 mt-3" style="width: 500px;">
+                <label for="gender" class="form-label "><b>Gender:</b></label>
+  
+                <input type="radio" id="male" name="gender" value="Male" class="radio form-control col-sm-1">
+                <label for="male" class="form-label " >Male</label>
+  
+                <input type="radio" id="female" name="gender" value="Female" class="radio form-control col-sm-1">
+                <label for="female" class="form-label " >Female</label>
+  
+                <input type="radio" id="other" name="gender" value="Others" class="radio form-control  col-sm-1">
+                <label for="other" class="form-label " >Others</label>
+              </span>
+
+
+
+            <span class="input-group" >
+                <div class="mb-3 mt-3" id="adrs" style="width: 345px;">
+                    <input type="text" class="form-control" name="address" placeholder="Address">
+                </div>
+
+                <div class="mb-3 mt-3" id="age" style="width: 345px; margin-left :12px ;">
+                    <input type="number" class="form-control" name="age" placeholder="Age">
+                </div>
+               
+
+            </span>
+            
+            
+           <span class="input-group">
+              
+                <div class="mb-3 mt-3">
+                    <input type="email" class="form-control" name = 'email' placeholder="Email"
+                    style="width: 345px;">
+                </div>
+                <div class="mb-3 mt-3">
+                    <input type="number" class="form-control" name="cnum" placeholder="Contact Number"
+                    style="width: 345px; margin-left :12px ;">
+                </div>
+              
+            </span>
+                        
+              <div class="mb-3">
+                               
+                <select class="form-control  mt-3"name = 'doc'>
+
+                    <option type="text">Doctor</option>
+                    {% for d in doc %}
+                  
+                    <option type="text"  value = '{{d.id}}' style="text-transform: capitalize;"> 
+                        {{d.user.first_name}} {{d.user.last_name}}</option>
+    
+                    {% endfor %}
+    
+                  </select>
+                </span>
+              </div>
+
+              <div class="mb-3">
+                <label for="img" class="form-label " style="color: azure ;"><b>Profile Photo:</b></label>
+                <input type="file" name = 'file' class="form-control" >
+              </div>
+
+            
+                <div class="mb-3 " >
+                    <label for="date1" class="form-label "><b>Consulting Date:</b></label>
+
+                    <input type="date" class="form-control" name = 'date1' >
+                  </div>
+
+                  <div class="mb-3 mt-3" >
+                    <textarea class="form-control " name="desc" rows="4" cols="50">Description</textarea> 
+                  </div>
+
+                            
+            <button type="submit" class="btn  text-align-center font-weight-bold mt-2" 
+            style="width: 200px;  margin-left: 250px; background-color:rgba(80, 93, 108); color: aliceblue;"> Register</button>
+
+
+        </form>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'patient_menu.html' %}
+{% block title %}
+    Patient
+{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container p-5" style="background-color: rgba(80, 93, 108, 0.7); width: 800px; border-radius: 5px;">
+
+    <h2 class="text-center text-uppercase  font-weight-bold mb-5 mt-5 p-4" style="background-color : rgba(80, 93, 108); color: azure;"> 
+        Book Appointment</h2>
+    
+        <form action="{% url 'book_appointment' doc.id %}" method='post' enctype="multipart/form-data">
+
+          {% csrf_token %}
+
+          
+            
+              <div>
+
+                <div class="mb-3 mt-3">
+                    <label for="date" class="form-label "><b>Date:</b></label>
+  
+                      <input type="date" class="form-control" name = 'date' placeholder="Appointment Date">
+                    </div>
+                       
+              <div class="mb-3 mt-3" >
+              <textarea class="form-control " name="desc" rows="4" cols="50">Description</textarea> 
+            </div>
+                            
+            <button type="submit" class="btn  text-align-center font-weight-bold mt-2" 
+                    style="width: 200px;  margin-left: 250px; background-color:rgba(80, 93, 108); color: aliceblue;">
+                    Save
+            </button>
+
+
+        </form>
+    </div>
+
+
+
+{% endblock %}
