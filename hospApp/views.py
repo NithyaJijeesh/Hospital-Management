@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.models import User,auth,Group
+from django.contrib import admin
+
 from django.contrib import messages
 from django.utils.text import capfirst
 from django.contrib.auth.decorators import login_required
-from .models import *
+#from .models import *
 
-#from hospApp.models import department, doctor, inpatient_bill, pathology, patient
-#from hospApp.models import qualification,room,path_test,outpatient_bill,prescription
+from hospApp.models import department, doctor, inpatient_bill, pathology, patient
+from hospApp.models import qualification,room,path_test,outpatient_bill,prescription
 
 
 
